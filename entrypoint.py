@@ -41,7 +41,7 @@ def offline_predictor_wrapper(predictor: MBART):
 
     offline_dataset = Dataset.from_json(configs["offline_data_path"])
     offline_dataset_inputs = [instance["input"] for instance in offline_dataset]
-    predictor.prepare()
+    # predictor.prepare() # Prepare happens internally so we dont need this.
     sys.stdout.write("Model and data loaded. Start the timer.\n")
     sys.stdout.flush()
     
@@ -80,6 +80,7 @@ if __name__ == "__main__":
         predictor = GoodBinarySentimentClassifier()
     else:
         raise NotImplementedError()
+    
     if args.offline:
         offline_predictor_wrapper(predictor)
     else:   
